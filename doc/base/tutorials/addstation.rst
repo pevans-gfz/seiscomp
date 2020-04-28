@@ -6,21 +6,24 @@ Add a new station
 
 You will ...
 
-* Add a new station to your SeisComP system for archiving.
-* Configure it for processing too.
+* Add a new station to your SeisComP system for archiving
+* Configure it for processing too
 
-:Pre-requisites for this tutorial:
-* :ref:`tutorials_postinstall`,
+Pre-requisites for this tutorial:
+
+* :ref:`tutorials_postinstall`
 * :ref:`tutorials_geofon_waveforms`
-* :ref:`tutorials_archiving`,
-* An understanding of :ref:`concepts_inventory`.
+* :ref:`tutorials_archiving`
+* An understanding of :ref:`concepts_inventory`
 
-:Afterwards/Results/Outcomes:
-* For the new station data are acquired and archived in real time.
-* The new station is used for automatic real-time data processing.
+Afterwards/Results/Outcomes:
 
-:Time range estimate:
-* 40 minutes.
+* For the new station data are acquired and archived in real time
+* The new station is used for automatic real-time data processing
+
+Time range estimate:
+
+* 40 minutes
 
 ----------
 
@@ -35,6 +38,27 @@ Try to answer the questions:
 * how long will you archive, and what streams?
 
 For this example, we'll add station GF99 from the 6C network in Myanmar.
+
+Common inventory sources
+========================
+
+Meta data can be obtained from many different sources or created from scratch.
+
+Fetch inventories
+-----------------
+
+* Other SeisComP systems. Use :ref:`scxmldump` to fetch inventories.
+* `Eida nodes`_. Use web interfaces such web browsers or wget to fetch an inventory.
+* Data centers providing `FDSNWS`_. Use web interfaces such web browsers or wget to fetch an inventory.
+
+
+Create and share inventories
+----------------------------
+
+* gempa's `SMP`_ for creating inventory from scratch and community sharing.
+  Create inventories for new or old networks and stations from permanent or temporary
+  deployments.
+  SMP provides inventories in :term:`SCML` format in multiple versions which can be used without modification.
 
 Configuring for acquisition and archiving
 =========================================
@@ -73,7 +97,7 @@ OR import, scinv, whatever. See the inventory tutorial.
 Then:
 
 .. code-block:: sh
- 
+
    $ seiscomp update-config
    $ seiscomp restart
 
@@ -138,3 +162,13 @@ If you have configured the station for processing, then:
 
   - In :program:`scolv`, the new station is either already included
     in automatic locations, or can be added manually.
+
+
+References
+==========
+
+.. target-notes::
+
+.. _`EIDA nodes` : http://orfeus-eu.org/stationbook/nodes/
+.. _`FDSNWS` : https://www.fdsn.org/webservices/datacenters/
+.. _`SMP` : https://smp.gempa.de

@@ -6,16 +6,19 @@ Help! I'm stuck! Now what?
 
 You will ...
 
-* Troubleshoot and resolve problems with SeisComP.
+* Troubleshoot and resolve problems with SeisComP
 
-:Pre-requisites for this tutorial:
-* None
+Pre-requisites for this tutorial:
 
-:Afterwards/Results/Outcomes:
-* Improved understanding of ways to solve SeisComP problems.
+* Have your SeisComP installation and configuration available
 
-:Time range estimate:
-* 5 minutes.
+Afterwards/Results/Outcomes:
+
+* Improved understanding of ways to solve issues when operating SeisComP
+
+Time range estimate:
+
+* 30 minutes
 
 ----------
 
@@ -43,7 +46,7 @@ HTML documentation
 
 Most modules have HTML documentation. When installed, it can be found in :program:`scconfig`
 under *Docs*. The HTML documentation can also be reached from the *Help*  menu of all GUIs.
-It contains the description of configuration and commandline parameters along with
+It contains the description of configuration and command-line parameters along with
 an overview with many detailed information.
 
 .. figure:: media/gui_help.png
@@ -58,9 +61,6 @@ Look under *Modules*, and choose the relevant module.
 For each parameter, the first few lines of description are shown;
 hovering over these reveals the full text.
 
-[Advanced:
-The text for these is taken from the XML files in `$SEISCOMP_ROOT/etc/descriptions`.]
-
 The HTML documentation is built regularly and available online, e.g. `gempa's documentation`_.
 
 .. _sec_tutorial_help_commandline:
@@ -69,13 +69,13 @@ Commandline help
 ----------------
 
 In addition to the HTML documentation, many SeisComP commands have manual
-pages which can be read on the commandline:
+pages which can be read on the command line:
 
 .. code-block:: sh
 
    man [module name]
 
-and help on commandline options:
+and help on command-line options:
 
 .. code-block:: sh
 
@@ -83,9 +83,50 @@ and help on commandline options:
 
 .. note::
 
-   The commandline option *-h* can be used with almost all modules. No matter how many
-   other commandline parameters were given, *-h* will stop the module and print
-   the help on the commandline.
+   The command-line option *-h* can be used with almost all modules. No matter how many
+   other command-line parameters were given, *-h* will stop the module and print
+   the help on the command-line.
+
+.. _sec_tutorial_help_config-params:
+
+Configuration parameters
+------------------------
+
+The :ref:`scconfig` GUI tool can be conveniently used to adjust the :term:`module`
+and :term:`bindings <binding>` configuration. It also displays help on each individual
+configuration parameter for every module. Read the :ref:`concepts
+section on configuration <concepts_configuration>` for a comprehensive overview.
+
+
+.. raw:: html
+
+  <div class="two column layout">
+
+.. figure:: media/scconfig-tooltips.png
+  :alt: scconfig: tool tips
+
+  Tool tips provide information on parameters.
+
+.. figure:: media/scconfig-evaluation.png
+  :alt: scconfig: parameter evaluation
+
+  scconfig evaluates the syntax of input values.
+
+.. raw:: html
+
+  </div>
+
+.. _sec_tutorial_help_config-params:
+
+Command-line parameters
+-----------------------
+
+Command-line parameters provide additional flexibility when executing modules.
+To learn about them read the :ref:`sec_tutorial_help_documentation` or execute
+
+.. code-block:: sh
+
+   [module name] -h
 
 .. _sec_tutorial_help_forum:
 
@@ -163,16 +204,16 @@ In addition:
 
   .. code-block:: sh
 
-     $ ~/seiscomp3/bin/seiscomp exec scmag --debug
+     $ ~/seiscomp/bin/seiscomp exec scmag --debug
      11:47:50 [debug] Adding plugin path: .
-     11:47:50 [debug] Adding plugin path: /home/user/.seiscomp3/plugins
-     11:47:50 [debug] Adding plugin path: /home/user/seiscomp3/lib/plugins
-     11:47:50 [debug] Adding plugin path: /home/user/seiscomp3/lib
-     11:47:50 [debug] Adding plugin path: /home/user/seiscomp3/share/plugins
-     11:47:50 [debug] Adding plugin path: /home/user/seiscomp3/lib
-     11:47:50 [debug] Adding plugin path: /home/user/seiscomp3/lib
-     11:47:50 [debug] Adding plugin path: /home/user/seiscomp3/share/plugins/scmag
-     11:47:50 [debug] Trying to open plugin at /home/user/seiscomp3/share/plugins/dbmysql.so
+     11:47:50 [debug] Adding plugin path: /home/user/.seiscomp/plugins
+     11:47:50 [debug] Adding plugin path: /home/user/seiscomp/lib/plugins
+     11:47:50 [debug] Adding plugin path: /home/user/seiscomp/lib
+     11:47:50 [debug] Adding plugin path: /home/user/seiscomp/share/plugins
+     11:47:50 [debug] Adding plugin path: /home/user/seiscomp/lib
+     11:47:50 [debug] Adding plugin path: /home/user/seiscomp/lib
+     11:47:50 [debug] Adding plugin path: /home/user/seiscomp/share/plugins/scmag
+     11:47:50 [debug] Trying to open plugin at /home/user/seiscomp/share/plugins/dbmysql.so
      11:47:50 [info] Plugin dbmysql registered
      11:47:50 [info]
      Plugins:
@@ -221,10 +262,10 @@ In addition:
 
    .. code-block:: sh
 
-      $ ~/seiscomp3/bin/seiscomp exec scmag -vvvv
+      $ ~/seiscomp/bin/seiscomp exec scmag -vvvv
 
    The output is the same, but it is sent to your normal logging file,
-   typically `~/.seiscomp3/log/scmag.log`.
+   typically `~/.seiscomp/log/scmag.log`.
 
 In :ref:`scconfig`, logging can be set globally.
 Go to the Modules tab, then System > global (see "logging")

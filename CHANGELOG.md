@@ -1,3 +1,16 @@
+# AGPL
+
+## 4.0.0
+
+* fdsnxml2inv
+
+  * Add documentation
+  * Expose configuration in scconfig
+
+* scmssort
+
+  * Add documentation
+
 # Jakarta
 
 ## Release YYYY.ddd
@@ -5,6 +18,11 @@
 * trunk
 
   * Add new surface waves magnitude Ms_20 according to IASPEI standard
+
+* scautopick
+
+  * Add amplitudes.enableUpdate to descriptions
+  * Add extraComments option to allow adding more comments to the pick, e.g. SNR
 
 * scqcv
 
