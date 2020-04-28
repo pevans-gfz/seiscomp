@@ -4,11 +4,12 @@
 Play back archived waveforms
 ****************************
 
-You will ...
+Aims:
 
 * Use previously recorded waveform files to re-run the analysis
-  of an old event using SeisComP. This is known as a *waveform playback*
-* Inserts result into your current SeisComP database for later processing
+  of an old event using SeisComP. This is known as a *waveform playback*.
+* Insert results into your current SeisComP database for later processing.
+* Review the results from playbacks.
 
 Pre-requisites for this tutorial:
 
@@ -30,10 +31,12 @@ Related tutorial(s):
 
 ----------
 
-Playbacks are an important way of testing module and whole-sytem configuration,
-operator trainings, system demonstrations and validations and tuning of the SeisComp modules
+Playbacks are an important way of testing module and whole-system configurations,
+operator trainings, system demonstrations and validations and tuning of the SeisComP modules
 used for detecting and locating events, e.g. involving
 
+* :ref:`seedlink`
+* :ref:`slarchive`
 * :ref:`scautopick`
 * :ref:`scautoloc`
 * :ref:`scamp`
@@ -46,8 +49,8 @@ other sources. The miniSEED data records in the data files must be sorted by end
 
 There are two types of playbacks:
 
-* :ref:`Real-time playbacks <_tutorials_rtplayback>`
-* :ref:`Non-real-time playbacks <_tutorials_rtplayback> or offline-playbacks`
+* :ref:`Real-time playbacks <tutorials_rtplayback>`.
+* :ref:`Non-real-time playbacks <tutorials_nonrtplayback>`.
 
 Data preparation
 ================
@@ -107,11 +110,12 @@ using the command-line tool :ref:`msrtsimul`. Therefore, seedlink requires a con
 
      Open :scrttv: to verify the success of this re-configuration. No new data must arrive.
 
-#. Start all automatic data processing modules you wish to involve, e.g.
+#. Restart all automatic data processing modules you wish to involve. Additionally start
+   :ref:`slarchive` to archive the miniSEED data in the SDS archive for post-processing.
 
    .. code-block:: sh
 
-      seiscomp start scmaster scautopick scautoloc scamp scmag scevent
+      seiscomp restart scmaster scautopick scautoloc scamp scmag scevent slarchive
 
 #. Start all desired :term:`GUI` modules to observe the data acquisition and processing
    and the event results, e.g.:
@@ -127,11 +131,19 @@ using the command-line tool :ref:`msrtsimul`. Therefore, seedlink requires a con
       msrtsimul -v [your miniSEED file]
 
    This will play back the data as if they where perfectly recorded and received now.
-   To preserve the time of the records use
+   To preserve the time of the records use :program:`msrtsimul` with the historic
+   mode:
 
    .. code-block:: sh
 
       msrtsimul -v -m historic [your miniSEED file]
+
+   .. note::
+
+      Using :program:`msrtsimul` with the historic mode requires to reset the
+      seedlink buffer and the buffer of other processing modules by removing
+      the buffer files and restarting the modules. This mode may
+      therefore be exclusively used by experienced users.
 
 Revert the seedlink configuration after the playback to return to the original real-time
 data acquisition.
@@ -155,13 +167,13 @@ Non-real-time playbacks
 In non-real-time playbacks, also referred to as offline playbacks, data are processed
 by each module as fast as possible. The results can be communicated by
 
-* Messages: message-based offline playback
+* Messages: message-based playback
 * XML files in :term:`SCML` format: XML playback. They require the processing
   modules to provide the *--ep* option.
 
 .. warning::
 
-   In non-real-time playbacks scheduling and the creation history is not representative of
+   In non-real-time playbacks scheduling and the creation history are not representative of
    real-time situations.
 
 Reviewing results
@@ -169,23 +181,30 @@ Reviewing results
 
 Use :ref:`scolv` or other :term:`GUIs <GUI>` to review the results:
 
-*  Event parameters are in the default database and the waveforms are in the default :term:`SDS` archive:
+*  Event parameters are in the default database. Configure :ref:`concepts_RecordStream`
+   if the waveforms are in the seedlink or in the :term:`SDS` archive:
 
    .. code-block:: sh
 
-      scolv -d mysql://sysop:sysop@localhost/seiscomp3 -I sdsarchvive:///home/sysop/seiscomp3/var/lib/archive
+      scolv -d mysql://sysop:sysop@localhost/seiscomp
 
 *  Event parameters are in the default database but the waveforms are read from the miniSEED file:
 
    .. code-block:: sh
 
-      scolv -d mysql://sysop:sysop@localhost/seiscomp3 -I file://[your file]
+      scolv -d mysql://sysop:sysop@localhost/seiscomp -I file://[your file]
+
+   .. note::
+
+      Reading from the original file will only work if the actual times of the data
+      are preserved during the playback. This is **not** the case when starting
+      :program:`msrtsimul` without the historic mode.
 
 *  Event parameters are available in one XML file and the waveforms are read from the miniSEED file:
 
    .. code-block:: sh
 
-      scolv --offline -d mysql://sysop:sysop@localhost/seiscomp3 -I file://[your miniSEED file]
+      scolv --offline -d mysql://sysop:sysop@localhost/seiscomp -I file://[your miniSEED file]
 
    To open the XML file click on the *File* menu of scolv. When results are available in several
    XML files, the files can be merged beforehand using :ref:`scxmlmerge`.

@@ -10,23 +10,28 @@ SeisComP in multiple formats (HTML, man, PDF, ePub etc) in a
 consistent way. The functionality of SeisComP differs between
 versions so the documentation is versioned along with SeisComP.
 For more general topics and tutorials please refer to the
-`SeisComP wiki <http://www.seiscomp.org/>`_.
+`SeisComP wiki`_.
 
-The documentation is written in `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ (reST) a
-simple text mark up format. The documentation is generated using `Sphinx <http://sphinx.pocoo.org/index.html>`_
-which is used to create the `Python documentation <http://docs.python.org/>`_.
+The documentation is written in `reStructuredText`_ (reST) a
+simple text mark up format. The documentation is generated using `Sphinx`_
+which is used to create the `Python documentation`_.
 The Sphinx website has a very good
-`introduction to reST <http://sphinx.pocoo.org/rest.html>`_ and also covers the Sphinx specific
-`directives <http://sphinx.pocoo.org/markup/index.html>`_.
+`introduction to reST`_ and also covers the Sphinx specific
+`directives`_.
 
-If you would like to add to this documentation or you find an error then please submit a patch to
-`trac <http://www.seiscomp.org/newticket>`_ or to the
-SeisComP `discussion forum <http://forum.seiscomp.org>`_.
+If you would like to add to this documentation or you find an error, then please
+submit a patch to `SeisComP on GitHub`_ or report to the
+SeisComP `discussion forum`_.
 
-If you are viewing the HTML version of the documentation in a browser
+.. note::
+
+   Please understand the :ref:`documentation style guide <documentation_style_guide>`
+   before contributing documentation.
+
+If you view the HTML version of the documentation in a browser,
 then you can use the *Show Source* link on each page to view the reST
-source. This or the documentation files for executables (see below) is
-a good starting point for a patch.
+source. The source and the documentation files for executables (see below) are
+good starting points for a new patch.
 
 Documenting Executables
 =======================
@@ -65,7 +70,8 @@ Images
 ======
 
 Any images should be placed in a suitable sub-directory of :file:`descriptions/media`.
-They can then be referred to (in .rst) like::
+Read the :ref:`documentation on image styles <documentation_style_guide>` for more details.
+The images can then be referred to (in .rst) like::
 
     .. figure::  media/scolv/scolv-overview.png
        :width: 16cm
@@ -102,9 +108,9 @@ go into separate XML files.
 Module
 ------
 
-A module template can be found in :file:`doc/templates/app.xml`.
+A template for a description XML file can be found in :file:`doc/templates/app.xml`.
 
-It describes a binary file, an application that can be started by SeisComP.
+The XML file describes the SeisComP :term:`module` with the configuration and command-line parameters.
 
 Element: **module**
 
@@ -127,7 +133,7 @@ Element: **module**
 |                             |          |           | account.                                      |
 +-----------------------------+----------+-----------+-----------------------------------------------+
 | **inherit-global-bindings** | attrib   |    no     | If global bindings are inherited. The default |
-|                             |          |           | is 'false'. If 'yes' then all parameters of   |
+|                             |          |           | is 'false'. If 'yes', then all parameters of  |
 |                             |          |           | the global binding are also available in      |
 |                             |          |           | the module binding to allow overwriting them. |
 |                             |          |           | Standalone modules will never inherit global  |
@@ -167,9 +173,9 @@ It follows a simple example of how a module definition looks like.
 Plugin
 ------
 
-A plugin template can be found in :file:`doc/templates/plugin.xml`.
+A template for a description XML file can be found in :file:`doc/templates/plugin.xml`.
 
-It describes an extension of a module's configuration. This is most likely the
+The XML file describes the SeisComP :term:`plugin` with the configuration and command-line parameters. This is most likely the
 case when an application loads dynamically shared libraries also called plugins.
 
 Element: **plugin**
@@ -279,7 +285,7 @@ Element: **configuration**
 | **group**         | element  |    no     | A parameter group that describes a logical        |
 |                   |          |           | grouping of parameters also called "scope" or     |
 |                   |          |           | "namespace". If a parameter in the                |
-|                   |          |           | configuration file contains dots then only        |
+|                   |          |           | configuration file contains dots, then only       |
 |                   |          |           | the last part is a parameter all others are       |
 |                   |          |           | groups.                                           |
 |                   |          |           |                                                   |
@@ -498,7 +504,7 @@ Element: **option**
 |                     |          |           | *server*.                                     |
 +---------------------+----------+-----------+-----------------------------------------------+
 | **argument**        | attrib   |    no     | The optional argument string. If argument is  |
-|                     |          |           | not set the option is a switch.               |
+|                     |          |           | not set, the option is a switch.              |
 +---------------------+----------+-----------+-----------------------------------------------+
 | **default**         | attrib   |    no     | The option's default value used if the option |
 |                     |          |           | is not given though it is hard in most cases  |
@@ -558,3 +564,18 @@ Below is an example of the module definition for :program:`scautoloc` (extract).
        </command-line>
      </module>
    </seiscomp>
+
+
+References
+==========
+
+.. target-notes::
+
+.. _`SeisComP wiki` : https://www.seiscomp.org/
+.. _`reStructuredText` : https://docutils.sourceforge.net/rst.html
+.. _`Sphinx` : https://sphinx.pocoo.org/index.html
+.. _`Python documentation` : https://docs.python.org/
+.. _`introduction to reST` : https://sphinx.pocoo.org/rest.html
+.. _`directives` : https://sphinx.pocoo.org/markup/index.html
+.. _`SeisComP on GitHub` : https://github.com/SeisComP
+.. _`discussion forum` : https://forum.seiscomp.org
